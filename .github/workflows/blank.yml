@@ -50,6 +50,6 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           echo ${GITHUB_REF##*/}
-          echo $ECR_REPOSITORY
+          echo $ENVIRONMENT
           echo $ECR_REPOSITORY
           echo $NAME
