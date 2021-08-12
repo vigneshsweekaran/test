@@ -6,13 +6,17 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ dev ]
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
+      - staging
+      - dev
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+env:
+  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -22,16 +26,28 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Set env to staging
+        if: endsWith(github.ref, '/master')
+        run: |
+          echo "ENVIRONMENT=prod" >> $GITHUB_ENV
+          echo "ECR_REPOSITORY=vigneshsweekaran" >> $GITHUB_ENV
+      - name: Set env to production
+        if: endsWith(github.ref, '/staging')
+        run: |
+         echo "ENVIRONMENT=staging" >> $GITHUB_ENV
+         echo "ECR_REPOSITORY=vigneshsweekaran-staging" >> $GITHUB_ENV
+      - name: Set env to production
+        if: endsWith(github.ref, '/dev')
+        run: |
+         echo "ENVIRONMENT=dev" >> $GITHUB_ENV
+         echo "ECR_REPOSITORY=vigneshsweekaran-dev" >> $GITHUB_ENV
+
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
           echo ${GITHUB_REF##*/}
+          echo $ECR_REPOSITORY
+          echo $ECR_REPOSITORY
