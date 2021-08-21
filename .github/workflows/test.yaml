@@ -24,10 +24,16 @@ jobs:
 
       ## I need help around here, as test:coverage generates a file and I need to get a value from a file
 
+      - name: Read package.json
+        id: coverage
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./coverage.txt
+          
       - uses: mshick/add-pr-comment@v1
         with:
           message: |
-            **Hello**
+            ${{ steps.coverage.outputs.content }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
           allow-repeats: false # This is the default
