@@ -1,0 +1,50 @@
+{
+  "name": "package.json-mastery",
+  "version": "1.0.0",
+  "description": "Mastery of the package.json file",
+  "private": false,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Easybuoy/package.json-mastery.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "npm",
+    "yarn"
+  ],
+  "author": "Ezekiel Ekunola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Easybuoy/package.json-mastery/issues"
+  },
+  "homepage": "https://github.com/Easybuoy/package.json-mastery#readme",
+  "engines": {
+    "npm": "6.10.0",
+    "node": "10.14.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1"
+  },
+  "nyc": {
+    "exclude": [
+      "server/app.js",
+      "server/config/",
+      "server/build"
+    ]
+  }
+}
