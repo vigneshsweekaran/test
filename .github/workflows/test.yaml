@@ -1,4 +1,4 @@
-ame: Report Code Coverage
+name: Report Code Coverage
 
 on:
   workflow_dispatch:
