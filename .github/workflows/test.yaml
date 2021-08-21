@@ -33,7 +33,7 @@ jobs:
       - uses: mshick/add-pr-comment@v1
         with:
           message: |
-            echo "${{ steps.coverage.outputs.content }}"
+            ${{ steps.coverage.outputs.content }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
           allow-repeats: false # This is the default
