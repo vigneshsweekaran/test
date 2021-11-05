@@ -26,5 +26,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          echo "Job2 runs in ubuntu:latest docker container"
+         PGPASSWORD=postgres psql -h postgres -U postgres -d test -c 'select * from schema.table'
          
