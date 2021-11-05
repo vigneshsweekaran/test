@@ -4,7 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Running Job1"
+  job2:
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
@@ -16,6 +21,10 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: test
     runs-on: ubuntu-latest
+    container: ubuntu:latest
 
     steps:
       - uses: actions/checkout@v2
+      - run: |
+          echo "Job2 runs in ubuntu:latest docker container"
+         
