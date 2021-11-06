@@ -8,8 +8,6 @@ services:
       - DB_USER=gitea
       - DB_PASSWD=gitea
     restart: always
-    volumes:
-      - git_data:/data
     ports:
       - 3000:3000
   db:
@@ -19,10 +17,5 @@ services:
       - POSTGRES_PASSWORD=gitea
       - POSTGRES_DB=gitea
     restart: always
-    volumes:
-      - db_data:/var/lib/postgresql/data
     expose:
       - 5432
-volumes:
-  db_data:
-  git_data:
