@@ -13,5 +13,8 @@ jobs:
         run: |
           docker-compose up -d
           docker ps -a
+          sleep 60
+          docker ps -a
+          sleep 60
           curl http://localhost:3000 || true
-          curl http://gitea:3000
+          curl http://gitea:3000 || true
