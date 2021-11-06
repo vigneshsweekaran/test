@@ -26,11 +26,11 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
+  
     runs-on: ubuntu-latest
     container: postgres:14
 
     steps:
       - run: |
-         PGPASSWORD=postgres psql -h postgres -U postgres -d test -c 'select * from schema.table'
+         PGPASSWORD=postgres psql -h postgres -U postgres -d test -c '\l'
          
