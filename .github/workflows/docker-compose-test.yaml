@@ -1,0 +1,16 @@
+name: Testing docker compose
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create containers
+        run: |
+          docker-compose up -d
+          docker ps -a
+          curl http://localhost:3000 || true
+          curl http://gitea:3000
