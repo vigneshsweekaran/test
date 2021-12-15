@@ -20,4 +20,5 @@ jobs:
       - name: Runs on us-east-1
         if: ${{ github.event.inputs.AWS_REGION == 'us-east-1' }}
         run: |
-          echo "${{ github.event.inputs.aws-region }}"
+          echo "${{ github.event.inputs.AWS_REGION }}"
+          echo "Hello world"
