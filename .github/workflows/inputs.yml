@@ -3,7 +3,7 @@ name: Testing github actions inputs
 on:
   workflow_dispatch:
     inputs:
-      AWSRegion:
+      AWS_REGION:
         type: choice
         description: Choose AWS Region
         required: true
@@ -18,6 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Runs on us-east-1
-        if: ${{ github.event.inputs.AWSRegion == 'us-east-1' }}
+        if: ${{ github.event.inputs.AWS_REGION == 'us-east-1' }}
         run: |
           echo "${{ github.event.inputs.aws-region }}"
