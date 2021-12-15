@@ -21,4 +21,11 @@ jobs:
         if: ${{ github.event.inputs.AWS_REGION == 'us-east-1' }}
         run: |
           echo "${{ github.event.inputs.AWS_REGION }}"
-          echo "Hello world"
+      - name: Runs on us-east-2
+        if: ${{ github.event.inputs.AWS_REGION == 'us-east-2' }}
+        run: |
+          echo "${{ github.event.inputs.AWS_REGION }}"
+      - name: Runs on us-west-1
+        if: ${{ github.event.inputs.AWS_REGION == 'us-west-1' }}
+        run: |
+          echo "${{ github.event.inputs.AWS_REGION }}"
