@@ -4,18 +4,18 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        type: aws-region
+        type: awsRegion
         description: Choose AWS Region
         options: 
-        - us-east-1
-        - us-east-2
-        - us-west-1
+        - 'us-east-1'
+        - 'us-east-2'
+        - 'us-west-1'
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Runs on us-east-1
-        if: github.event.inputs.aws-region == "us-east-1"
+        if: ${{ github.event.inputs.awsRegion == 'us-east-1' }}
         run: |
           echo "${{ github.event.inputs.aws-region }}"
