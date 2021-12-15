@@ -6,11 +6,10 @@ on:
       name:
         type: aws-region
         description: Choose AWS Region
-        required: true
         options: 
-          - "us-east-1"
-          - "us-east-2"
-          - "us-west-1"
+        - us-east-1
+        - us-east-2
+        - us-west-1
 
 jobs:
   test:
