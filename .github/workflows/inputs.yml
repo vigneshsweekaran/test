@@ -4,12 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        type: awsRegion
-        description: Choose AWS Region
-        options: 
-        - 'us-east-1'
-        - 'us-east-2'
-        - 'us-west-1'
+#         type: awsRegion
+#         description: Choose AWS Region
+#         options: 
+#         - 'us-east-1'
+#         - 'us-east-2'
+#         - 'us-west-1'
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
 
 jobs:
   test:
