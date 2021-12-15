@@ -16,6 +16,7 @@ on:
         description: 'Build and deplot to us-east-1'
         required: true
         type: boolean
+        default: "true"
       us-east-2:
         description: 'Build and deplot to us-east-2'
         required: true
@@ -41,7 +42,15 @@ jobs:
         if: ${{ github.event.inputs.AWS_REGION == 'us-west-1' }}
         run: |
           echo "${{ github.event.inputs.AWS_REGION }}"
-      - name: Runs on us-west-1
+      - name: Runs on us-east-1
         if: ${{ github.event.inputs.us-east-1 == 'true' }}
+        run: |
+          echo "${{ github.event.inputs.us-east-1 }}"
+      - name: Runs on us-east-2
+        if: ${{ github.event.inputs.us-east-2 == 'true' }}
+        run: |
+          echo "${{ github.event.inputs.us-east-1 }}"
+      - name: Runs on us-west-1
+        if: ${{ github.event.inputs.us-west-1 == 'true' }}
         run: |
           echo "${{ github.event.inputs.us-east-1 }}"
