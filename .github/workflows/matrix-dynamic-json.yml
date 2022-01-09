@@ -1,0 +1,28 @@
+
+name: Matrix dynamic json
+
+on:
+  workflow_dispatch:
+env:
+  NAME: "vignesh sweekaran"
+  
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - id: set-matrix for master
+      if: ${{ github.ref == 'refs/heads/master' }}
+      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+    - id: set-matrix for dev
+      if: ${{ github.ref == 'refs/heads/dev' }}
+      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.job1.outputs.matrix)}}
+    steps:
+    - run: echo ${{ matrix.project }}
+    - run: echo ${{ matrix.config }}
