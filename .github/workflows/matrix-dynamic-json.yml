@@ -19,10 +19,9 @@ jobs:
           import os
           matrix = 'none'
           if os.environ['GITHUB_REF'] == 'refs/heads/dev':
-              matrix-data = '{ "name":"John", "age":30, "city":"New York"}'
+              print('::set-output name=matrix::{"include":[1,2,3]}')
           elif os.environ['GITHUB_REF'] == 'refs/heads/master':
-              matrix-data = '{ "name":"John", "age":30, "city":"New York"}'
-          print('::set-output name=matrix::' + matrix-data)
+              print('::set-output name=matrix::{"include":[1,2,3,4,5]}')
   job2:
     needs: job1
     runs-on: ubuntu-latest
