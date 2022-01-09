@@ -12,16 +12,23 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - name: Determine Environment
-        id: set-matrix
-        shell: python
-        run: |
-          import os
-          matrix = 'none'
-          if os.environ['GITHUB_REF'] == 'refs/heads/dev':
-              print('::set-output name=matrix::{"include":[{"machines":"1"},{"machines":"2"},{"machines":"3"}]')
-          elif os.environ['GITHUB_REF'] == 'refs/heads/master':
-              print('::set-output name=matrix::{"include":[{"machines":"1"},{"machines":"2"},{"machines":"3"},{"machines":"4"},{"machines":"5"}]}')
+    - id: set-matrix
+      run: echo "::set-output name=matrix::{\"include\":[{\"machines\":\"1\"},{\"machines\":\"2\"}]}"
+#   job1:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       matrix: ${{ steps.set-matrix.outputs.matrix }}
+#     steps:
+#       - name: Determine Environment
+#         id: set-matrix
+#         shell: python
+#         run: |
+#           import os
+#           matrix = 'none'
+#           if os.environ['GITHUB_REF'] == 'refs/heads/dev':
+#               print('::set-output name=matrix::{"include":[{"machines":"1"},{"machines":"2"},{"machines":"3"}]')
+#           elif os.environ['GITHUB_REF'] == 'refs/heads/master':
+#               print('::set-output name=matrix::{"include":[{"machines":"1"},{"machines":"2"},{"machines":"3"},{"machines":"4"},{"machines":"5"}]}')
   job2:
     needs: job1
     runs-on: ubuntu-latest
