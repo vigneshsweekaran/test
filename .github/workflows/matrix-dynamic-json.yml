@@ -19,9 +19,9 @@ jobs:
           import os
           matrix = 'none'
           if os.environ['GITHUB_REF'] == 'refs/heads/dev':
-            matrix-data = '{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}'
+            matrix-data = "{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
           elif os.environ['GITHUB_REF'] == 'refs/heads/master':
-            matrix-data = '{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}'
+            matrix-data = "{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
           print('::set-output name=matrix::' + matrix-data)
   job2:
     needs: job1
