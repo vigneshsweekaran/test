@@ -1,0 +1,56 @@
+name: Testing github actions inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      AWS_REGION:
+        type: choice
+        description: Choose AWS Region
+        required: true
+        default: 'us-east-1'
+        options: 
+        - 'us-east-1'
+        - 'us-east-2'
+        - 'us-west-1'
+      us-east-1:
+        description: 'Build and deplot to us-east-1'
+        required: true
+        type: boolean
+        default: "true"
+      us-east-2:
+        description: 'Build and deplot to us-east-2'
+        required: true
+        type: boolean
+      us-west-1:
+        description: 'Build and deplot to us-west-1'
+        required: true
+        type: boolean
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runs on us-east-1
+        if: ${{ github.event.inputs.AWS_REGION == 'us-east-1' }}
+        run: |
+          echo "${{ github.event.inputs.AWS_REGION }}"
+      - name: Runs on us-east-2
+        if: ${{ github.event.inputs.AWS_REGION == 'us-east-2' }}
+        run: |
+          echo "${{ github.event.inputs.AWS_REGION }}"
+      - name: Runs on us-west-1
+        if: ${{ github.event.inputs.AWS_REGION == 'us-west-1' }}
+        run: |
+          echo "${{ github.event.inputs.AWS_REGION }}"
+      - name: Runs on us-east-1
+        if: ${{ github.event.inputs.us-east-1 == 'true' }}
+        run: |
+          echo "${{ github.event.inputs.us-east-1 }}"
+      - name: Runs on us-east-2
+        if: ${{ github.event.inputs.us-east-2 == 'true' }}
+        run: |
+          echo "${{ github.event.inputs.us-east-1 }}"
+      - name: Runs on us-west-1
+        if: ${{ github.event.inputs.us-west-1 == 'true' }}
+        run: |
+          echo "${{ github.event.inputs.us-east-1 }}"

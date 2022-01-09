@@ -1,0 +1,38 @@
+
+name: Matrix dynamic json
+
+on:
+  workflow_dispatch:
+env:
+  NAME: "vignesh sweekaran"
+  
+jobs:
+#   job1:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       matrix: ${{ steps.set-matrix.outputs.matrix }}
+#     steps:
+#     - id: set-matrix
+#       run: echo "::set-output name=matrix::{\"include\":[{\"machines\":\"1\"},{\"machines\":\"2\"}]}"
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Determine Environment
+        id: set-matrix
+        shell: python
+        run: |
+          import os
+          matrix = 'none'
+          if os.environ['GITHUB_REF'] == 'refs/heads/dev':
+              print('::set-output name=matrix::{"include":[{"machines":"1"},{"machines":"2"},{"machines":"3"}]}')
+          elif os.environ['GITHUB_REF'] == 'refs/heads/master':
+              print('::set-output name=matrix::{"include":[{"machines":"1"},{"machines":"2"},{"machines":"3"},{"machines":"4"},{"machines":"5"}]}')
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.job1.outputs.matrix)}}
+    steps:
+    - run: echo ${{ matrix.machines }}
