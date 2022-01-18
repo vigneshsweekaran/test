@@ -14,6 +14,7 @@ RUN apt update \
     && rm -rf /var/lib/apt/list/*
 # cd into the user directory, download and unzip the github actions runner
 RUN RUNNER_VERSION=$(curl -sL https://api.github.com/repos/actions/runner/releases/latest | jq -r ".tag_name" | sed 's/v//g') \
+    && echo "Runner version is $RUNNER_VERSION" \
     && cd /home/docker && mkdir actions-runner && cd actions-runner \
     && curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
     && tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
