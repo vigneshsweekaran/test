@@ -1,0 +1,15 @@
+name: Create docker image for github runner
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build the Docker image
+        run: |
+          cd github-runner-image
+          docker build --tag vigneshsweekaran/github-runner:latest .
