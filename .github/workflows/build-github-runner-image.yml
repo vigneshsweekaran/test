@@ -21,4 +21,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker Image
-        run: docker push vigneshsweekaran/github-runner:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/github-runner:latest
