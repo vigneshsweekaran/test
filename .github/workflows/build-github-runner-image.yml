@@ -3,7 +3,7 @@ name: Create docker image for github runner
 on: workflow_dispatch
 
 jobs:
-  build:
+  Build-and-Push-Docker-Image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
