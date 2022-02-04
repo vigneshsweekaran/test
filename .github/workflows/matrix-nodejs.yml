@@ -22,7 +22,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Installing Dependencies
       run: |
-        npm install -g railflow
+        npm install railflow
     - name: Checking
       run: |
         railflow --version
