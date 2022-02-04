@@ -23,4 +23,6 @@ jobs:
     - name: Installing Dependencies
       run: |
         npm install -g railflow
+    - name: Checking
+      run: |
         railflow --version
