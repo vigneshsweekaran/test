@@ -47,6 +47,8 @@ check_pattern(){
   done
 }
 
+# Script for moving branch from one folder to another folder (It creates new branch and delete old branch)
+
 if [[ $1 == "move" ]]; then
   if [[ $2 == "/" ]]; then
     for branch in $(git branch -r | sed '/origin\/HEAD/d' | sed 's/^\s*//' | sed 's/origin\///' | grep -v /); do
@@ -72,6 +74,8 @@ if [[ $1 == "move" ]]; then
     done
   fi
 fi
+
+#Script for moving branches from root to misc folder (It creates new branch and delete old branch)
 
 if [[ $1 == "move-to-misc" ]]; then
   for branch in $(git branch -r | sed '/origin\/HEAD/d' | sed 's/^\s*//' | sed 's/origin\///'); do
