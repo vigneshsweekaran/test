@@ -4,10 +4,10 @@ git fetch --all > /dev/null 2>&1
 flag_delete=false
 
 # Exclude pattern
-pattern=(*/main */master */dev \              # To match exact branch name eg: main, master, develop
-         *test1* \                            # To match specific word in either in branch name or folder name
-         */*sta* \                            # To match specific word or char in brach name only
-         */bug1/*)                            # To Match specific path in branch name 
+pattern=(*/main */master */dev \       # To match exact branch name eg: main, master, develop
+         *release1* \                  # To match specific word in either in branch name or folder name
+         */*sta* \                     # To match specific word or char in brach name only
+         */bug1/* *misc/*)             # To Match specific path in branch name 
 
 if [[ $1 == "clean" ]]; then
   for branch in $(git branch -r |  sed 's/\*//' |  sed '/origin\/HEAD/d' | sed 's/^\s*//'); do
@@ -73,27 +73,41 @@ if [[ $1 == "move" ]]; then
   fi
 fi
 
+if [[ $1 == "move-to-misc" ]]; then
+  for branch in $(git branch -r | sed '/origin\/HEAD/d' | sed 's/^\s*//' | sed 's/origin\///'); do
+    check_pattern "/${branch}"
+    if [[ $2 == "yes" && $retval == "false" ]]; then
+      echo "********** Moving branch: $branch  --> misc/${branch} **********"
+      git push origin origin/${branch}:refs/heads/misc/${branch} :${branch}
+      retval="true"
+    elif [[ $retval == "false" ]]; then
+      echo "$branch  --> misc/${branch}"
+      retval="true"
+    fi
+  done
+fi
+
 # Examples for moving branch from one folder to another folder (It creates new branch and delete old branch)
 
 # For moving from / to folder
 # For Dry run
-#   ./cleanup/sh move / feature
+#   ./cleanup.sh move / feature
 # For moving
-#   ./cleanup/sh move / feature yes
+#   ./cleanup.sh move / feature yes
 
 # For moving between two folders
 # For Dry run
 #   ./cleanup.sh move src_folder destination_folder
-#   ./cleanup/sh move bug feature
+#   ./cleanup.sh move bug feature
 # For moving
-#   ./cleanup/sh move bug feature yes
+#   ./cleanup.sh move bug feature yes
 
 # For moving between two level source folder and one destination folder
 # For Dry run
 #   ./cleanup.sh move src_folder destination_folder
-#   ./cleanup/sh move feature/new feature
+#   ./cleanup.sh move feature/new feature
 # For moving
-#   ./cleanup/sh move feature/new feature yes
+#   ./cleanup.sh move feature/new feature yes
 
 #-------------------------------------------------------------------------------------------------
 
@@ -102,6 +116,14 @@ fi
 #   ./cleanup/sh clean
 # For Deleting
 #   ./cleanup/sh clean yes
+
+#--------------------------------------------------------------------------------------------------
+
+#Examples for moving branch from root to misc folder (It creates new branch and delete old branch)
+# For Dry run
+#   ./cleanup/sh move-to-misc
+# For moving
+#   ./cleanup/sh move-to-misc yes
 
 #--------------------------------------------------------------------------------------------------
 
