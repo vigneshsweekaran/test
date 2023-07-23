@@ -1,0 +1,14 @@
+# Common settings that generally should always be used with your language specific settings
+
+# Auto detect text files and perform LF normalization
+*          text=auto
+
+#
+# The above will handle all files NOT found below
+#
+
+# Documents
+# exlude_file_list_start
+clean.sh text=auto
+github-runner-image/Dockerfile text=auto
+# exlude_file_list_end
